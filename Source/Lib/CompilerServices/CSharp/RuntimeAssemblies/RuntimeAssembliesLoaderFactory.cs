@@ -140,7 +140,7 @@ public static class RuntimeAssembliesLoaderFactory
                                             functionArgument.ParameterType.Name,
                                             functionArgument.ParameterType.GenericTypeArguments);
 
-                                        var argumentTextSpan = TextEditorTextSpan.FabricateTextSpan(functionArgument.Name ?? "luthetus_error_null");
+                                        var argumentTextSpan = TextEditorTextSpan.FabricateTextSpan(functionArgument.Name ?? "devIn_error_null");
                                         var argumentIdentifierToken = new IdentifierToken(argumentTextSpan);
 
                                         var variableDeclarationStatementNode = new VariableDeclarationNode(

@@ -10,7 +10,7 @@ public static class DropdownHelper
 {
 	public static Task RenderDropdownAsync(
 		IDropdownService dropdownService,
-		DevInCommonJavaScriptInteropApi luthetusCommonJavaScriptInteropApi,
+		DevInCommonJavaScriptInteropApi devInCommonJavaScriptInteropApi,
 		string anchorHtmlElementId,
 		DropdownOrientation dropdownOrientation,
 		Key<DropdownRecord> dropdownKey,
@@ -20,7 +20,7 @@ public static class DropdownHelper
 	{
 		return RenderDropdownAsync(
 			dropdownService,
-			luthetusCommonJavaScriptInteropApi,
+			devInCommonJavaScriptInteropApi,
 			anchorHtmlElementId,
 			dropdownOrientation,
 			dropdownKey,
@@ -29,7 +29,7 @@ public static class DropdownHelper
 			{
 				try
 		        {
-		        	await luthetusCommonJavaScriptInteropApi
+		        	await devInCommonJavaScriptInteropApi
 		        		.FocusHtmlElementById(elementHtmlIdForReturnFocus, preventScroll)
 		        		.ConfigureAwait(false);
 		        }
@@ -44,7 +44,7 @@ public static class DropdownHelper
 
 	public static Task RenderDropdownAsync(
 		IDropdownService dropdownService,
-		DevInCommonJavaScriptInteropApi luthetusCommonJavaScriptInteropApi,
+		DevInCommonJavaScriptInteropApi devInCommonJavaScriptInteropApi,
 		string anchorHtmlElementId,
 		DropdownOrientation dropdownOrientation,
 		Key<DropdownRecord> dropdownKey,
@@ -53,7 +53,7 @@ public static class DropdownHelper
 	{
 		return RenderDropdownAsync(
 			dropdownService,
-			luthetusCommonJavaScriptInteropApi,
+			devInCommonJavaScriptInteropApi,
 			anchorHtmlElementId,
 			dropdownOrientation,
 			dropdownKey,
@@ -80,14 +80,14 @@ public static class DropdownHelper
 	
 	public static async Task RenderDropdownAsync(
 		IDropdownService dropdownService,
-		DevInCommonJavaScriptInteropApi luthetusCommonJavaScriptInteropApi,
+		DevInCommonJavaScriptInteropApi devInCommonJavaScriptInteropApi,
 		string anchorHtmlElementId,
 		DropdownOrientation dropdownOrientation,
 		Key<DropdownRecord> dropdownKey,
 		MenuRecord menu,
 		Func<Task>? restoreFocusOnClose)
 	{
-		var buttonDimensions = await luthetusCommonJavaScriptInteropApi
+		var buttonDimensions = await devInCommonJavaScriptInteropApi
 			.MeasureElementById(anchorHtmlElementId)
 			.ConfigureAwait(false);
 

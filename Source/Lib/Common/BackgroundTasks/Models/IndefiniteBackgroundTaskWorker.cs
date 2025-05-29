@@ -11,12 +11,12 @@ public sealed class IndefiniteBackgroundTaskWorker
         BackgroundTaskQueue queue,
         BackgroundTaskService backgroundTaskService,
         ILoggerFactory loggerFactory,
-        DevInHostingKind luthetusHostingKind)
+        DevInHostingKind devInHostingKind)
     {
         Queue = queue;
         BackgroundTaskService = backgroundTaskService;
         _logger = loggerFactory.CreateLogger<IndefiniteBackgroundTaskWorker>();
-        DevInHostingKind = luthetusHostingKind;
+        DevInHostingKind = devInHostingKind;
     }
     
     public BackgroundTaskQueue Queue { get; }

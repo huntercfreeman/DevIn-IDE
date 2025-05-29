@@ -24,14 +24,14 @@ public class DevInTextEditorJavaScriptInteropApi
     public ValueTask ScrollElementIntoView(string elementId)
     {
         return _jsRuntime.InvokeVoidAsync(
-            "luthetusTextEditor.scrollElementIntoView",
+            "devInTextEditor.scrollElementIntoView",
             elementId);
     }
 
     public ValueTask PreventDefaultOnWheelEvents(string elementId)
     {
         return _jsRuntime.InvokeVoidAsync(
-            "luthetusTextEditor.preventDefaultOnWheelEvents",
+            "devInTextEditor.preventDefaultOnWheelEvents",
             elementId);
     }
 
@@ -40,7 +40,7 @@ public class DevInTextEditorJavaScriptInteropApi
         int countOfTestCharacters)
     {
         return _jsRuntime.InvokeAsync<CharAndLineMeasurements>(
-            "luthetusTextEditor.getCharAndLineMeasurementsInPixelsById",
+            "devInTextEditor.getCharAndLineMeasurementsInPixelsById",
             measureCharacterWidthAndLineHeightElementId,
             countOfTestCharacters);
     }
@@ -51,7 +51,7 @@ public class DevInTextEditorJavaScriptInteropApi
     public ValueTask<string> EscapeHtml(string input)
     {
         return _jsRuntime.InvokeAsync<string>(
-            "luthetusTextEditor.escapeHtml",
+            "devInTextEditor.escapeHtml",
             input);
     }
 
@@ -61,7 +61,7 @@ public class DevInTextEditorJavaScriptInteropApi
         double clientY)
     {
         return _jsRuntime.InvokeAsync<RelativeCoordinates>(
-            "luthetusTextEditor.getRelativePosition",
+            "devInTextEditor.getRelativePosition",
             elementId,
             clientX,
             clientY);
@@ -73,7 +73,7 @@ public class DevInTextEditorJavaScriptInteropApi
         double scrollTopInPixels)
     {
         return _jsRuntime.InvokeVoidAsync(
-            "luthetusTextEditor.setScrollPositionBoth",
+            "devInTextEditor.setScrollPositionBoth",
             bodyElementId,
             scrollLeftInPixels,
             scrollTopInPixels);
@@ -84,7 +84,7 @@ public class DevInTextEditorJavaScriptInteropApi
         double scrollLeftInPixels)
     {
         return _jsRuntime.InvokeVoidAsync(
-            "luthetusTextEditor.setScrollPositionLeft",
+            "devInTextEditor.setScrollPositionLeft",
             bodyElementId,
             scrollLeftInPixels);
     }
@@ -94,7 +94,7 @@ public class DevInTextEditorJavaScriptInteropApi
         double scrollTopInPixels)
     {
         return _jsRuntime.InvokeVoidAsync(
-            "luthetusTextEditor.setScrollPositionTop",
+            "devInTextEditor.setScrollPositionTop",
             bodyElementId,
             scrollTopInPixels);
     }
@@ -103,14 +103,14 @@ public class DevInTextEditorJavaScriptInteropApi
         string elementId)
     {
         return _jsRuntime.InvokeAsync<TextEditorDimensions>(
-            "luthetusTextEditor.getTextEditorMeasurementsInPixelsById",
+            "devInTextEditor.getTextEditorMeasurementsInPixelsById",
             elementId);
     }
 
     public ValueTask<ElementPositionInPixels> GetBoundingClientRect(string primaryCursorContentId)
     {
         return _jsRuntime.InvokeAsync<ElementPositionInPixels>(
-            "luthetusTextEditor.getBoundingClientRect",
+            "devInTextEditor.getBoundingClientRect",
             primaryCursorContentId);
     }
 }

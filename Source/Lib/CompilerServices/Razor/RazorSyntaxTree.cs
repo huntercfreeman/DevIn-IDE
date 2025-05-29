@@ -51,7 +51,7 @@ public class RazorSyntaxTree
         var absolutePath = _environmentProvider.AbsolutePathFactory(resourceUri.Value, false);
 
         _codebehindClassIdentifier = absolutePath.NameNoExtension;
-        _codebehindRenderFunctionIdentifier = "__LUTHETUS_RENDER_FUNCTION__";
+        _codebehindRenderFunctionIdentifier = "__DEV_IN_RENDER_FUNCTION__";
 
         _codebehindClassBuilder = new($"public class {_codebehindClassIdentifier}\n{{");
         _codebehindRenderFunctionBuilder = new($"public void {_codebehindRenderFunctionIdentifier}()\n\t{{");

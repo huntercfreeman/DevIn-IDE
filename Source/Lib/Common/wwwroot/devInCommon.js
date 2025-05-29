@@ -1,6 +1,6 @@
 // https://stackoverflow.com/questions/75988682/debounce-in-javascript
 // https://stackoverflow.com/a/75988895/19310517
-const luthetusCommonDebounce = (callback, wait) => {
+const devInCommonDebounce = (callback, wait) => {
   let timeoutId = null;
   return (...args) => {
     window.clearTimeout(timeoutId);
@@ -10,8 +10,8 @@ const luthetusCommonDebounce = (callback, wait) => {
   };
 }
 
-const luthetusCommonOnWindowSizeChanged = luthetusCommonDebounce(() => {
-    var localBrowserResizeInteropDotNetObjectReference = luthetusCommon.browserResizeInteropDotNetObjectReference;
+const devInCommonOnWindowSizeChanged = devInCommonDebounce(() => {
+    var localBrowserResizeInteropDotNetObjectReference = devInCommon.browserResizeInteropDotNetObjectReference;
 
     if (!localBrowserResizeInteropDotNetObjectReference) {
     	return;
@@ -22,16 +22,16 @@ const luthetusCommonOnWindowSizeChanged = luthetusCommonDebounce(() => {
 		.then(data => data);
 }, 300);
 
-window.luthetusCommon = {
+window.devInCommon = {
 	browserResizeInteropDotNetObjectReference: null,
     subscribeWindowSizeChanged: function (browserResizeInteropDotNetObjectReference) {
     	// https://github.com/chrissainty/BlazorBrowserResize/blob/master/BrowserResize/BrowserResize/wwwroot/js/browser-resize.js
-    	luthetusCommon.browserResizeInteropDotNetObjectReference = browserResizeInteropDotNetObjectReference;
-        window.addEventListener("resize", luthetusCommonOnWindowSizeChanged);
+    	devInCommon.browserResizeInteropDotNetObjectReference = browserResizeInteropDotNetObjectReference;
+        window.addEventListener("resize", devInCommonOnWindowSizeChanged);
     },
     disposeWindowSizeChanged: function () {
-    	luthetusCommon.browserResizeInteropDotNetObjectReference = null;
-        window.removeEventListener("resize", luthetusCommonOnWindowSizeChanged);
+    	devInCommon.browserResizeInteropDotNetObjectReference = null;
+        window.removeEventListener("resize", devInCommonOnWindowSizeChanged);
     },
     focusHtmlElementById: function (elementId, preventScroll) {
         let element = document.getElementById(elementId);

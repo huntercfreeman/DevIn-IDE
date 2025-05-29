@@ -20,12 +20,12 @@ namespace DevIn.Common.RazorLib.Installations.Models;
 public record DevInHostingInformation
 {
     public DevInHostingInformation(
-        DevInHostingKind luthetusHostingKind,
-        DevInPurposeKind luthetusPurposeKind,
+        DevInHostingKind devInHostingKind,
+        DevInPurposeKind devInPurposeKind,
         BackgroundTaskService backgroundTaskService)
     {
-        DevInHostingKind = luthetusHostingKind;
-        DevInPurposeKind = luthetusPurposeKind;
+        DevInHostingKind = devInHostingKind;
+        DevInPurposeKind = devInPurposeKind;
         BackgroundTaskService = backgroundTaskService;
     }
 

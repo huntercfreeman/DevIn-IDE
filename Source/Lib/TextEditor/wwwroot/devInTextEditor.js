@@ -1,4 +1,4 @@
-window.luthetusTextEditor = {
+window.devInTextEditor = {
     scrollElementIntoView: function (elementId) {
 
         let element = document.getElementById(elementId);

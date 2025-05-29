@@ -1,4 +1,4 @@
-window.luthetusIde = {
+window.devInIde = {
     preventDefaultBrowserKeybindings: function (elementId) {
     	// This function is intended to only be invoked
     	// from C# when the DevInHostingKind is Photino.

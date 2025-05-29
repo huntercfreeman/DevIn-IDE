@@ -73,7 +73,7 @@ public class IdeBackgroundTaskApi : IBackgroundTaskGroup
 	private readonly IAppOptionsService _appOptionsService;
 	private readonly ICommandFactory _commandFactory;
 	private readonly ITerminalGroupService _terminalGroupService;
-	private readonly DevInHostingInformation _luthetusHostingInformation;
+	private readonly DevInHostingInformation _devInHostingInformation;
 	private readonly IIdeHeaderService _ideHeaderService;
 	private readonly IServiceProvider _serviceProvider;
 
@@ -102,7 +102,7 @@ public class IdeBackgroundTaskApi : IBackgroundTaskGroup
         IAppOptionsService appOptionsService,
         ICommandFactory commandFactory,
         ITerminalGroupService terminalGroupService,
-        DevInHostingInformation luthetusHostingInformation,
+        DevInHostingInformation devInHostingInformation,
         IIdeHeaderService ideHeaderService,
         IServiceProvider serviceProvider)
     {
@@ -130,7 +130,7 @@ public class IdeBackgroundTaskApi : IBackgroundTaskGroup
         _appOptionsService = appOptionsService;
         _commandFactory = commandFactory;
         _terminalGroupService = terminalGroupService;
-        _luthetusHostingInformation = luthetusHostingInformation;
+        _devInHostingInformation = devInHostingInformation;
         _ideHeaderService = ideHeaderService;
         _serviceProvider = serviceProvider;
     }
@@ -310,8 +310,8 @@ public class IdeBackgroundTaskApi : IBackgroundTaskGroup
 
     private void AddGeneralTerminal()
     {
-        if (_luthetusHostingInformation.DevInHostingKind == DevInHostingKind.Wasm ||
-            _luthetusHostingInformation.DevInHostingKind == DevInHostingKind.ServerSide)
+        if (_devInHostingInformation.DevInHostingKind == DevInHostingKind.Wasm ||
+            _devInHostingInformation.DevInHostingKind == DevInHostingKind.ServerSide)
         {
             _terminalService.Register(
                 new TerminalWebsite(
@@ -362,8 +362,8 @@ public class IdeBackgroundTaskApi : IBackgroundTaskGroup
 
     private void AddExecutionTerminal()
     {
-        if (_luthetusHostingInformation.DevInHostingKind == DevInHostingKind.Wasm ||
-            _luthetusHostingInformation.DevInHostingKind == DevInHostingKind.ServerSide)
+        if (_devInHostingInformation.DevInHostingKind == DevInHostingKind.Wasm ||
+            _devInHostingInformation.DevInHostingKind == DevInHostingKind.ServerSide)
         {
             _terminalService.Register(
                 new TerminalWebsite(

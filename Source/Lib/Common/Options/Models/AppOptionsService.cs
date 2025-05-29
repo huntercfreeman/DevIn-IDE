@@ -30,9 +30,9 @@ public class AppOptionsService : IAppOptionsService
     public CommonBackgroundTaskApi CommonBackgroundTaskApi { get; set; }
 
 #if DEBUG
-    public string StorageKey => "luthetus-common_theme-storage-key-debug"; 
+    public string StorageKey => "devIn-common_theme-storage-key-debug"; 
 #else
-    public string StorageKey => "luthetus-common_theme-storage-key";
+    public string StorageKey => "devIn-common_theme-storage-key";
 #endif
 
 	public string ThemeCssClassString { get; set; } = ThemeFacts.VisualStudioDarkThemeClone.CssClassString;

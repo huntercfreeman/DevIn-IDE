@@ -39,7 +39,7 @@ public class BrowserResizeInterop
     /// But I'm probably never going to do use this extra logic I wrote with the re-using of the DotNetObjectReference
     /// when I re-subscribe and such (because I'll only dispose when the app is closed). #YAGNI
     /// </summary>
-    public void SubscribeWindowSizeChanged(DevInCommonJavaScriptInteropApi luthetusCommonJavaScriptInteropApi)
+    public void SubscribeWindowSizeChanged(DevInCommonJavaScriptInteropApi devInCommonJavaScriptInteropApi)
     {
     	if (_browserResizeInteropDotNetObjectReference is null)
     	{
@@ -50,12 +50,12 @@ public class BrowserResizeInterop
 			}
     	}
     	
-    	luthetusCommonJavaScriptInteropApi.SubscribeWindowSizeChanged(
+    	devInCommonJavaScriptInteropApi.SubscribeWindowSizeChanged(
     		_browserResizeInteropDotNetObjectReference);
     }
     
-    public void DisposeWindowSizeChanged(DevInCommonJavaScriptInteropApi luthetusCommonJavaScriptInteropApi)
+    public void DisposeWindowSizeChanged(DevInCommonJavaScriptInteropApi devInCommonJavaScriptInteropApi)
     {
-    	luthetusCommonJavaScriptInteropApi.DisposeWindowSizeChanged();
+    	devInCommonJavaScriptInteropApi.DisposeWindowSizeChanged();
     }
 }

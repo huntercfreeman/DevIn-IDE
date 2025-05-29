@@ -37,7 +37,7 @@ public class DotNetCliOutputParser
 	public void ParseOutputEntireDotNetRun(string output, string message)
 	{
 		var stringWalker = new StringWalker(
-			new ResourceUri("/__LUTHETUS__/DotNetRunOutputParser.txt"),
+			new ResourceUri("/__DEV_IN__/DotNetRunOutputParser.txt"),
 			output);
 			
 		var diagnosticLineList = new List<DiagnosticLine>();

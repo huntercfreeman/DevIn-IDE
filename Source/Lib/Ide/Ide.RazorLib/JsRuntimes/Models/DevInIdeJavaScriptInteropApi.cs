@@ -29,6 +29,6 @@ public class DevInIdeJavaScriptInteropApi
     public ValueTask PreventDefaultBrowserKeybindings()
     {
         return _jsRuntime.InvokeVoidAsync(
-            "luthetusIde.preventDefaultBrowserKeybindings");
+            "devInIde.preventDefaultBrowserKeybindings");
     }
 }

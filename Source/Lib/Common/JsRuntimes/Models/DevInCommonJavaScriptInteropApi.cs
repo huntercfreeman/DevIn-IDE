@@ -23,20 +23,20 @@ public class DevInCommonJavaScriptInteropApi
     public ValueTask SubscribeWindowSizeChanged(DotNetObjectReference<BrowserResizeInterop> browserResizeInteropDotNetObjectReference)
     {
         return _jsRuntime.InvokeVoidAsync(
-            "luthetusCommon.subscribeWindowSizeChanged",
+            "devInCommon.subscribeWindowSizeChanged",
             browserResizeInteropDotNetObjectReference);
     }
 
     public ValueTask DisposeWindowSizeChanged()
     {
         return _jsRuntime.InvokeVoidAsync(
-            "luthetusCommon.disposeWindowSizeChanged");
+            "devInCommon.disposeWindowSizeChanged");
     }
     
     public ValueTask FocusHtmlElementById(string elementId, bool preventScroll = false)
     {
         return _jsRuntime.InvokeVoidAsync(
-            "luthetusCommon.focusHtmlElementById",
+            "devInCommon.focusHtmlElementById",
             elementId,
             preventScroll);
     }
@@ -44,21 +44,21 @@ public class DevInCommonJavaScriptInteropApi
     public ValueTask<bool> TryFocusHtmlElementById(string elementId)
     {
         return _jsRuntime.InvokeAsync<bool>(
-            "luthetusCommon.tryFocusHtmlElementById",
+            "devInCommon.tryFocusHtmlElementById",
             elementId);
     }
     
     public ValueTask<MeasuredHtmlElementDimensions> MeasureElementById(string elementId)
     {
         return _jsRuntime.InvokeAsync<MeasuredHtmlElementDimensions>(
-            "luthetusCommon.measureElementById",
+            "devInCommon.measureElementById",
             elementId);
     }
 
     public ValueTask LocalStorageSetItem(string key, object? value)
     {
         return _jsRuntime.InvokeVoidAsync(
-            "luthetusCommon.localStorageSetItem",
+            "devInCommon.localStorageSetItem",
             key,
             value);
     }
@@ -66,20 +66,20 @@ public class DevInCommonJavaScriptInteropApi
     public ValueTask<string?> LocalStorageGetItem(string key)
     {
         return _jsRuntime.InvokeAsync<string?>(
-            "luthetusCommon.localStorageGetItem",
+            "devInCommon.localStorageGetItem",
             key);
     }
 
     public ValueTask<string> ReadClipboard()
     {
         return _jsRuntime.InvokeAsync<string>(
-            "luthetusCommon.readClipboard");
+            "devInCommon.readClipboard");
     }
 
     public ValueTask SetClipboard(string value)
     {
         return _jsRuntime.InvokeVoidAsync(
-            "luthetusCommon.setClipboard",
+            "devInCommon.setClipboard",
             value);
     }
 
@@ -87,7 +87,7 @@ public class DevInCommonJavaScriptInteropApi
         string nodeElementId)
     {
         return _jsRuntime.InvokeAsync<ContextMenuFixedPosition>(
-            "luthetusCommon.getTreeViewContextMenuFixedPosition",
+            "devInCommon.getTreeViewContextMenuFixedPosition",
             nodeElementId);
     }
 }
