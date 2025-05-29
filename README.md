@@ -1,4 +1,10 @@
-# Luthetus.Ide (In Development)
+> An IDE you can DevIn
+
+> Hey, you DevInTonight?
+
+> Go get Devin cause we're gonna start DevIn
+
+# DevIn Ide (In Development)
 
 Make a new .NET Solution:
 ![New .NET Solution](./Images/Ide/Gifs/workflowMakeNew.gif)
