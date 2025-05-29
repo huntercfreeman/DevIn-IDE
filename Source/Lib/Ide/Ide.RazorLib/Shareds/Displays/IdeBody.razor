@@ -1,0 +1,38 @@
+@using DevIn.Common.RazorLib.Dimensions.Models;
+@using DevIn.Common.RazorLib.Panels.Displays
+@using DevIn.Common.RazorLib.Panels.Models;
+@using DevIn.Common.RazorLib.Resizes.Displays
+@using DevIn.Ide.RazorLib.Editors.Displays
+@using DevIn.Common.RazorLib.StateHasChangedBoundaries.Displays
+
+@{ var panelState = PanelService.GetPanelState(); }
+
+<div class="di_ide_body"
+     style="@BodyElementDimensions.StyleString">
+
+    <StateHasChangedBoundary @ref="_leftPanelStateHasChangedBoundaryComponent">
+        <PanelGroupDisplay PanelGroupKey="PanelFacts.LeftPanelGroupKey"
+                      AdjacentElementDimensions="_editorElementDimensions"
+                      DimensionAttributeKind="DimensionAttributeKind.Width"
+                      ReRenderSelfAndAdjacentElementDimensionsFunc="ReRenderLeftPanelAndEditor" />
+     </StateHasChangedBoundary>
+
+    <ResizableColumn LeftElementDimensions="PanelFacts.GetTopLeftPanelGroup(panelState).ElementDimensions"
+                     RightElementDimensions="_editorElementDimensions"
+                     ReRenderFuncAsync="ReRenderLeftPanelAndEditor" />
+
+    <StateHasChangedBoundary @ref="_editorStateHasChangedBoundaryComponent">
+        <EditorDisplay EditorElementDimensions="_editorElementDimensions" />
+    </StateHasChangedBoundary>
+    
+    <ResizableColumn LeftElementDimensions="_editorElementDimensions"
+                     RightElementDimensions="PanelFacts.GetTopRightPanelGroup(panelState).ElementDimensions"
+                     ReRenderFuncAsync="ReRenderEditorAndRightPanel" />
+
+    <StateHasChangedBoundary @ref="_rightPanelStateHasChangedBoundaryComponent">
+        <PanelGroupDisplay PanelGroupKey="PanelFacts.RightPanelGroupKey"
+                      AdjacentElementDimensions="_editorElementDimensions"
+                      DimensionAttributeKind="DimensionAttributeKind.Width"
+                      ReRenderSelfAndAdjacentElementDimensionsFunc="ReRenderEditorAndRightPanel" />
+    </StateHasChangedBoundary>
+</div>

@@ -1,0 +1,38 @@
+@using DevIn.CompilerServices.CSharp.CompilerServiceCase;
+@using DevIn.CompilerServices.CSharpProject.CompilerServiceCase;
+@using DevIn.CompilerServices.Css;
+@using DevIn.CompilerServices.DotNetSolution.CompilerServiceCase;
+@using DevIn.CompilerServices.Json;
+@using DevIn.CompilerServices.Razor.CompilerServiceCase;
+@using DevIn.CompilerServices.Xml;
+
+@if (TreeViewCompilerService.Item is XmlCompilerService xmlCompilerService)
+{
+    @: TODO: XmlCompilerService
+}
+else if (TreeViewCompilerService.Item is DotNetSolutionCompilerService dotNetSolutionCompilerService)
+{
+    @: TODO: DotNetSolutionCompilerService
+}
+else if (TreeViewCompilerService.Item is CSharpProjectCompilerService cSharpProjectCompilerService)
+{
+    @: TODO: CSharpProjectCompilerService
+}
+else if (TreeViewCompilerService.Item is CSharpCompilerService cSharpCompilerService)
+{
+    <div>
+        @cSharpCompilerService.__CSharpBinder.NamespaceGroupMap
+    </div>
+}
+else if (TreeViewCompilerService.Item is RazorCompilerService razorCompilerService)
+{
+    @: TODO: RazorCompilerService
+}
+else if (TreeViewCompilerService.Item is CssCompilerService cssCompilerService)
+{
+    @: TODO: CssCompilerService
+}
+else if (TreeViewCompilerService.Item is JsonCompilerService jsonCompilerService)
+{
+    @: TODO: JsonCompilerService
+}

@@ -1,0 +1,9 @@
+﻿using DevIn.TextEditor.RazorLib.CompilerServices;
+
+namespace DevIn.TextEditor.RazorLib.Decorations.Models;
+
+public class TextEditorRegistryWrap : ITextEditorRegistryWrap
+{
+    public IDecorationMapperRegistry DecorationMapperRegistry { get; set; } = new DecorationMapperRegistryDefault();
+    public ICompilerServiceRegistry CompilerServiceRegistry { get; set; } = new CompilerServiceRegistryDefault();
+}

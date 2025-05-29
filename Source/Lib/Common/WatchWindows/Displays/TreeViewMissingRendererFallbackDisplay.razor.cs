@@ -1,0 +1,11 @@
+﻿using DevIn.Common.RazorLib.ComponentRenderers.Models;
+using Microsoft.AspNetCore.Components;
+
+namespace DevIn.Common.RazorLib.WatchWindows.Displays;
+
+public partial class TreeViewMissingRendererFallbackDisplay : ComponentBase,
+    ITreeViewMissingRendererFallbackType
+{
+    [Parameter, EditorRequired]
+    public string DisplayText { get; set; } = string.Empty;
+}

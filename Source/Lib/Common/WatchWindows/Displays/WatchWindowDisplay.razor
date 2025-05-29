@@ -1,0 +1,10 @@
+@using DevIn.Common.RazorLib.Dropdowns.Displays
+@using DevIn.Common.RazorLib.Dropdowns.Models;
+@using DevIn.Common.RazorLib.TreeViews.Displays
+@using DevIn.Common.RazorLib.TreeViews.Models;
+
+<TreeViewContainerDisplay TreeViewContainerKey="TreeViewContainerKey"
+                          CssStyleString="height: 100%;"
+                          OnContextMenuFunc="OnTreeViewContextMenuFunc"
+                          TreeViewMouseEventHandler="_treeViewMouseEventHandler"
+                          TreeViewKeyboardEventHandler="_treeViewKeyboardEventHandler" />

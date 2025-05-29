@@ -1,0 +1,48 @@
+@using DevIn.Common.RazorLib.Contexts.Displays
+@using DevIn.Common.RazorLib.Contexts.Models;
+@using DevIn.Common.RazorLib.Dropdowns.Displays
+@using DevIn.Common.RazorLib.Dropdowns.Models;
+@using DevIn.Common.RazorLib.TreeViews.Displays
+@using DevIn.Ide.RazorLib.FolderExplorers.Models;
+@using DevIn.Common.RazorLib.TreeViews.Models;
+
+<ContextBoundary ContextRecord="ContextFacts.FolderExplorerContext"
+                 ClassCssString="di_ide_folder-explorer-display"
+                 StyleCssString="height: 100%">
+                 
+	@{ var appOptionsState = AppOptionsService.GetAppOptionsState(); }
+    
+    @if (appOptionsState.Options.ShowPanelTitles)
+    {
+	    <div class="di_ide_section-title">
+	        Folder Explorer
+	    </div>
+    }
+    
+    <div class="di_ide_section-body @AppOptionsService.ShowPanelTitlesCssClass">
+
+        @{ var folderExplorerState = FolderExplorerService.GetFolderExplorerState(); }
+
+        @if (folderExplorerState.AbsolutePath is null)
+        {
+            <button class="di_button"
+                    @onclick="() => IdeBackgroundTaskApi.FolderExplorer_ShowInputFile()">
+                Open Folder
+            </button>
+        }
+        else
+        {
+            <CascadingValue Name="DevInTreeViewIconWidth" Value="appOptionsState.Options.IconSizeInPixels">
+                <CascadingValue Name="DevInTreeViewIconHeight" Value="appOptionsState.Options.IconSizeInPixels">
+                    <CascadingValue Name="OffsetPerDepthInPixels" Value="OffsetPerDepthInPixels">
+                        <TreeViewContainerDisplay TreeViewContainerKey="FolderExplorerState.TreeViewContentStateKey"
+                                                  CssStyleString="height: 100%;"
+                                                  OnContextMenuFunc="OnTreeViewContextMenuFunc"
+                                                  TreeViewKeyboardEventHandler="_treeViewKeyboardEventHandler"
+                                                  TreeViewMouseEventHandler="_treeViewMouseEventHandler"/>
+                    </CascadingValue>
+                </CascadingValue>
+            </CascadingValue>
+        }
+    </div>
+</ContextBoundary>

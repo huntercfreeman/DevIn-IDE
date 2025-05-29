@@ -1,0 +1,71 @@
+@using DevIn.Common.RazorLib.Contexts.Displays
+@using DevIn.Common.RazorLib.Contexts.Models;
+@using DevIn.Common.RazorLib.Dropdowns.Displays
+@using DevIn.Common.RazorLib.Dropdowns.Models;
+@using DevIn.Common.RazorLib.Installations.Models;
+@using DevIn.Common.RazorLib.Menus.Displays
+@using DevIn.Ide.RazorLib.Settings.Displays
+@using DevIn.Ide.RazorLib.Shareds.Displays.Internals
+@using DevIn.Ide.RazorLib.StartupControls.Displays
+@using DevIn.Ide.RazorLib.Shareds.Models;
+
+@{
+	var borderBottomHeight =  AppOptionsService.GetAppOptionsState().Options.ResizeHandleHeightInPixels;
+	var contextBoundaryCssStyle = $"display: flex; justify-content: space-between; border-bottom: {borderBottomHeight}px solid var(--di_primary-border-color);";
+}
+
+<ContextBoundary ContextRecord="ContextFacts.MainLayoutHeaderContext"
+                 ClassCssString="di_ide_header"
+                 StyleCssString="@contextBoundaryCssStyle">
+    
+    <div class="di_ide_header-left-content"
+         style="display: flex;">
+        
+        <SettingsDialogEntryPoint/>
+
+        <button @ref="_buttonFileElementReference"
+                @onclick="RenderFileDropdownOnClick"
+			    id="@IdeHeaderState.ButtonFileId"
+                class="di_button"
+                style="margin-left: 15px;">
+            File
+        </button>
+
+		<button @ref="_buttonToolsElementReference"
+                @onclick="RenderToolsDropdownOnClick"
+			    id="@IdeHeaderState.ButtonToolsId"
+                class="di_button"
+                style="margin-left: 15px;">
+            Tools
+        </button>
+
+		<button @ref="_buttonViewElementReference"
+                @onclick="RenderViewDropdownOnClick"
+			    id="@IdeHeaderState.ButtonViewId"
+                class="di_button"
+                style="margin-left: 15px;">
+			View
+         </button>
+
+		<button @ref="_buttonRunElementReference"
+                @onclick="RenderRunDropdownOnClick"
+			    id="@IdeHeaderState.ButtonRunId"
+				class="di_button"
+                style="margin-left: 15px;">
+            Run
+        </button>
+
+        <button class="di_button"
+                style="margin-left: 15px;"
+                @onclick="OpenInfoDialogOnClick">
+            Info
+        </button>
+
+        @if (DevInHostingInformation.DevInHostingKind == DevInHostingKind.ServerSide)
+        {
+            <IdeImportExportButtons/>
+        }
+
+        <StartupControlDisplay/>
+    </div>
+</ContextBoundary>

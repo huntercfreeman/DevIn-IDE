@@ -1,0 +1,14 @@
+using DevIn.Common.RazorLib.Keys.Models;
+
+namespace DevIn.Ide.RazorLib.Terminals.Models;
+
+public interface ITerminalService
+{
+	public event Action? TerminalStateChanged;
+
+	public TerminalState GetTerminalState();
+
+    public void Register(ITerminal terminal);
+    public void StateHasChanged();
+    public void Dispose(Key<ITerminal> terminalKey);
+}

@@ -1,0 +1,13 @@
+using Microsoft.AspNetCore.Components;
+using DevIn.TextEditor.RazorLib;
+
+namespace DevIn.Extensions.CompilerServices.Displays.Internals;
+
+public partial class VariableSyntaxDisplay : ComponentBase
+{
+	[Inject]
+	private TextEditorService TextEditorService { get; set; } = null!;
+	
+	[Parameter, EditorRequired]
+	public SyntaxViewModel SyntaxViewModel { get; set; } = default!;
+}

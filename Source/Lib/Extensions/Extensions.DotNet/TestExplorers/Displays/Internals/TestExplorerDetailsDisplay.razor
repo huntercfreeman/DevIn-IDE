@@ -1,0 +1,16 @@
+@using DevIn.Common.RazorLib.Keys.Models
+@using DevIn.Common.RazorLib.ShouldRenderBoundaries.Displays
+@using DevIn.TextEditor.RazorLib.TextEditors.Displays
+@using DevIn.TextEditor.RazorLib.TextEditors.Displays.Internals
+@using DevIn.TextEditor.RazorLib.TextEditors.Models
+@using DevIn.Ide.RazorLib.Terminals.Models;
+@using DevIn.Ide.RazorLib.Terminals.Displays;
+
+<div class="di_ide_test-explorer-details"
+	 style="@ElementDimensions.StyleString">
+
+	<ShouldRenderBoundary>
+		<TextEditorViewModelSlimDisplay TextEditorViewModelKey="DetailsTextEditorViewModelKey"
+									    ViewModelDisplayOptions="_textEditorViewModelDisplayOptions" />
+	</ShouldRenderBoundary>
+</div>
