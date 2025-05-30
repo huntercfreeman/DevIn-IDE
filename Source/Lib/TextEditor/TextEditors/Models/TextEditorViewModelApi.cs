@@ -233,7 +233,6 @@ public sealed class TextEditorViewModelApi
         TextEditorViewModel viewModel,
         TextEditorTextSpan textSpan)
     {
-    	// targetScrollTop
         var lineInformation = modelModifier.GetLineInformationFromPositionIndex(textSpan.StartInclusiveIndex);
         var lineIndex = lineInformation.Index;
         var hiddenLineCount = 0;
@@ -242,39 +241,65 @@ public sealed class TextEditorViewModelApi
         	if (index < lineIndex)
         		hiddenLineCount++;
         }
+        // Scroll start
         var targetScrollTop = (lineIndex - hiddenLineCount) * viewModel.CharAndLineMeasurements.LineHeight;
-
-		// targetScrollLeft
-		var columnIndex = textSpan.StartInclusiveIndex - lineInformation.Position_StartInclusiveIndex;
-        var targetScrollLeft = columnIndex * viewModel.CharAndLineMeasurements.CharacterWidth;
+        bool lowerBoundInRange = viewModel.ScrollTop <= targetScrollTop;
+        bool upperBoundInRange = targetScrollTop < (viewModel.TextEditorDimensions.Height + viewModel.ScrollTop);
+        if (lowerBoundInRange && upperBoundInRange)
+        {
+            targetScrollTop = viewModel.ScrollTop;
+        }
+        else
+        {
+        	var startDistanceToTarget = Math.Abs(targetScrollTop - viewModel.ScrollTop);
+        	var endDistanceToTarget = Math.Abs(targetScrollTop - (viewModel.TextEditorDimensions.Height + viewModel.ScrollTop));
+        	
+    		// Scroll end
+        	if (endDistanceToTarget < startDistanceToTarget)
+        	{
+        		var margin = 3 * viewModel.CharAndLineMeasurements.LineHeight;
+        		var maxMargin = viewModel.TextEditorDimensions.Height * .3;
+        		if (margin > maxMargin)
+        			margin = maxMargin;
+        	
+        		targetScrollTop -= (viewModel.TextEditorDimensions.Height - margin);
+        	}
+        }
         
-		bool lowerBoundInRange;
-		bool upperBoundInRange;
-
+		var columnIndex = textSpan.StartInclusiveIndex - lineInformation.Position_StartInclusiveIndex;
+		// Scroll start
+        var targetScrollLeft = columnIndex * viewModel.CharAndLineMeasurements.CharacterWidth;
         lowerBoundInRange = viewModel.ScrollLeft <= targetScrollLeft;
         upperBoundInRange = targetScrollLeft < (viewModel.TextEditorDimensions.Width + viewModel.ScrollLeft);
-
         if (lowerBoundInRange && upperBoundInRange)
-            targetScrollLeft = viewModel.ScrollLeft;
-
-        // scrollTop needs to be modified?
-        var currentHeight = viewModel.TextEditorDimensions.Height;
-
-        lowerBoundInRange = viewModel.ScrollTop <= targetScrollTop;
-        upperBoundInRange = targetScrollTop < (currentHeight + viewModel.ScrollTop);
-
-        if (lowerBoundInRange && upperBoundInRange)
-            targetScrollTop = viewModel.ScrollTop;
-
-        // Return early if neither value needs to change
-        if (targetScrollLeft == viewModel.ScrollLeft && targetScrollTop == viewModel.ScrollTop)
-            return;
-
-        SetScrollPositionBoth(
-            editContext,
-	        viewModel,
-	        targetScrollLeft,
-            targetScrollTop);
+        {
+        	targetScrollLeft = viewModel.ScrollLeft;
+        }
+        else
+        {
+        	var startDistanceToTarget = targetScrollLeft - viewModel.ScrollLeft;
+        	var endDistanceToTarget = targetScrollLeft - (viewModel.TextEditorDimensions.Width + viewModel.ScrollLeft);
+        	
+        	// Scroll end
+        	if (endDistanceToTarget < startDistanceToTarget)
+        	{
+        		var margin = 9 * viewModel.CharAndLineMeasurements.CharacterWidth;
+        		var maxMargin = viewModel.TextEditorDimensions.Width * .3;
+        		if (margin > maxMargin)
+        			margin = maxMargin;
+        	
+        		targetScrollLeft -= (viewModel.TextEditorDimensions.Width - margin);
+        	}
+        }
+            
+        if (targetScrollTop == -1 && targetScrollLeft == -1)
+        	return;
+        else if (targetScrollTop != -1 && targetScrollLeft != -1)
+        	SetScrollPositionBoth(editContext, viewModel, targetScrollLeft, targetScrollTop);
+        else if (targetScrollTop != -1)
+        	SetScrollPositionTop(editContext, viewModel, targetScrollTop);
+    	else
+        	SetScrollPositionLeft(editContext, viewModel, targetScrollLeft);
     }
 
     public ValueTask FocusPrimaryCursorAsync(string primaryCursorContentId)
