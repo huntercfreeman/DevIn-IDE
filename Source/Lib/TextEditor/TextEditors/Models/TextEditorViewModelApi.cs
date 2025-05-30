@@ -222,66 +222,59 @@ public sealed class TextEditorViewModelApi
 		viewModel.MutateScrollLeft((int)Math.Ceiling(pixels), viewModel.TextEditorDimensions);
     }
 
+	/// <summary>
+	/// If a given scroll direction is already within view of the text span, do not scroll on that direction.
+	///
+	/// Measurements are in pixels.
+	/// </summary>
     public void ScrollIntoView(
         TextEditorEditContext editContext,
         TextEditorModel modelModifier,
         TextEditorViewModel viewModel,
         TextEditorTextSpan textSpan)
     {
+    	// targetScrollTop
         var lineInformation = modelModifier.GetLineInformationFromPositionIndex(textSpan.StartInclusiveIndex);
         var lineIndex = lineInformation.Index;
-        var columnIndex = textSpan.StartInclusiveIndex - lineInformation.Position_StartInclusiveIndex;
-
-        // Unit of measurement is pixels (px)
-        var scrollLeft = columnIndex *
-            viewModel.CharAndLineMeasurements.CharacterWidth;
-            
         var hiddenLineCount = 0;
         foreach (var index in viewModel.PersistentState.HiddenLineIndexHashSet)
         {
         	if (index < lineIndex)
         		hiddenLineCount++;
         }
+        var targetScrollTop = (lineIndex - hiddenLineCount) * viewModel.CharAndLineMeasurements.LineHeight;
 
-        // Unit of measurement is pixels (px)
-        var scrollTop = (lineIndex - hiddenLineCount) *
-            viewModel.CharAndLineMeasurements.LineHeight;
-
-		var currentScrollLeft = viewModel.ScrollLeft;
-		var currentScrollTop = viewModel.ScrollTop;
-		
-		bool caseA;
-		bool caseB;
-		
-        // If a given scroll direction is already within view of the text span, do not scroll on that direction
+		// targetScrollLeft
+		var columnIndex = textSpan.StartInclusiveIndex - lineInformation.Position_StartInclusiveIndex;
+        var targetScrollLeft = columnIndex * viewModel.CharAndLineMeasurements.CharacterWidth;
         
-        // scrollLeft needs to be modified?
-        var currentWidth = viewModel.TextEditorDimensions.Width;
+		bool lowerBoundInRange;
+		bool upperBoundInRange;
 
-        caseA = currentScrollLeft <= scrollLeft;
-        caseB = scrollLeft < (currentWidth + currentScrollLeft);
+        lowerBoundInRange = viewModel.ScrollLeft <= targetScrollLeft;
+        upperBoundInRange = targetScrollLeft < (viewModel.TextEditorDimensions.Width + viewModel.ScrollLeft);
 
-        if (caseA && caseB)
-            scrollLeft = currentScrollLeft;
+        if (lowerBoundInRange && upperBoundInRange)
+            targetScrollLeft = viewModel.ScrollLeft;
 
         // scrollTop needs to be modified?
         var currentHeight = viewModel.TextEditorDimensions.Height;
 
-        caseA = currentScrollTop <= scrollTop;
-        caseB = scrollTop < (currentHeight + currentScrollTop);
+        lowerBoundInRange = viewModel.ScrollTop <= targetScrollTop;
+        upperBoundInRange = targetScrollTop < (currentHeight + viewModel.ScrollTop);
 
-        if (caseA && caseB)
-            scrollTop = currentScrollTop;
+        if (lowerBoundInRange && upperBoundInRange)
+            targetScrollTop = viewModel.ScrollTop;
 
-        // Return early if both values are 'null'
-        if (scrollLeft == currentScrollLeft && scrollTop == currentScrollTop)
+        // Return early if neither value needs to change
+        if (targetScrollLeft == viewModel.ScrollLeft && targetScrollTop == viewModel.ScrollTop)
             return;
 
         SetScrollPositionBoth(
             editContext,
 	        viewModel,
-	        scrollLeft,
-            scrollTop);
+	        targetScrollLeft,
+            targetScrollTop);
     }
 
     public ValueTask FocusPrimaryCursorAsync(string primaryCursorContentId)
